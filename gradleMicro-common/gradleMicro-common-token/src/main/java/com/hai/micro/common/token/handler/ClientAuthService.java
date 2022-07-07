@@ -15,7 +15,7 @@ import com.hai.micro.common.other.constant.JwtAuthContext;
 import com.hai.micro.common.other.constant.TenantCachePrefix;
 import com.hai.micro.common.other.constant.UserAuthContext;
 import com.hai.micro.common.other.enums.PlatformAuthTypeEnum;
-import com.hai.micro.common.other.error.BaseException;
+import com.hai.micro.common.other.error.BusinessException;
 import com.hai.micro.common.other.service.RedisService;
 import com.hai.micro.common.other.vo.JwtAccessTokenVO;
 import com.hai.micro.common.other.vo.UserAuthVO;
@@ -56,7 +56,7 @@ public class ClientAuthService {
                 handleWapMiniAuth(jwtAccessTokenVO);
                 break;
             default:
-                throw new BaseException("抱歉暂无访问权限，不支持的平台类型");
+                throw new BusinessException("抱歉暂无访问权限，不支持的平台类型");
         }
     }
 
@@ -72,25 +72,25 @@ public class ClientAuthService {
             case Manage:
                 boolean manageApiAuth = ((HandlerMethod) handler).hasMethodAnnotation(ManageApiAuth.class);
                 if (!manageApiAuth) {
-                    throw new BaseException("抱歉暂无访问权限");
+                    throw new BusinessException("抱歉暂无访问权限");
                 }
             case Machine:
                 boolean machineApiAuth = ((HandlerMethod) handler).hasMethodAnnotation(MachineApiAuth.class);
                 if (!machineApiAuth) {
-                    throw new BaseException("抱歉暂无访问权限");
+                    throw new BusinessException("抱歉暂无访问权限");
                 }
             case OpenAPI:
                 boolean openApiAuth = ((HandlerMethod) handler).hasMethodAnnotation(OpenApiAuth.class);
                 if (!openApiAuth) {
-                    throw new BaseException("抱歉暂无访问权限");
+                    throw new BusinessException("抱歉暂无访问权限");
                 }
             case WAP_MINI_APP:
                 boolean wapMiniApiAuth = ((HandlerMethod) handler).hasMethodAnnotation(WapMiniApiAuth.class);
                 if (!wapMiniApiAuth) {
-                    throw new BaseException("抱歉暂无访问权限");
+                    throw new BusinessException("抱歉暂无访问权限");
                 }
             default:
-                throw new BaseException("抱歉暂无访问权限");
+                throw new BusinessException("抱歉暂无访问权限");
         }
     }
 
@@ -123,7 +123,7 @@ public class ClientAuthService {
             cacheAccessToken = redisService.getString(key);
         }
         if (cacheAccessToken == null) {
-            throw new BaseException("获取授权信息失败");
+            throw new BusinessException("获取授权信息失败");
         }
         return JSONObject.parseObject(cacheAccessToken, UserAuthVO.class);
     }

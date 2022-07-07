@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hai.micro.common.other.enums.SystemAuthTypeEnum;
-import com.hai.micro.common.other.error.BaseException;
+import com.hai.micro.common.other.error.BusinessException;
 import com.hai.micro.common.other.vo.JwtAccessTokenVO;
 
 import cn.hutool.core.util.CharsetUtil;
@@ -81,10 +81,10 @@ public class JwtUtils {
         try {
             JWT jwt = JWTUtil.parseToken(sm4.decryptStr(token));
             if (jwt.verify()) {
-                throw new BaseException("抱歉暂无访问权限");
+                throw new BusinessException("抱歉暂无访问权限");
             }
             if (jwt.validate(30L)) {
-                throw new BaseException("登陆已过期请重新登陆");
+                throw new BusinessException("登陆已过期请重新登陆");
             }
             JSONObject jsonObject = jwt.getPayloads();
             jwtAccessTokenVO = jsonObject.toBean(JwtAccessTokenVO.class);

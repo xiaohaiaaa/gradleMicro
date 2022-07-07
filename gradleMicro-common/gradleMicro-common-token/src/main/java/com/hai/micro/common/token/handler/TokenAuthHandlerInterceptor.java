@@ -15,7 +15,7 @@ import com.hai.micro.common.other.constant.FeignAuthContext;
 import com.hai.micro.common.other.constant.UserAuthContext;
 import com.hai.micro.common.other.enums.PlatformAuthTypeEnum;
 import com.hai.micro.common.other.enums.SystemAuthTypeEnum;
-import com.hai.micro.common.other.error.BaseException;
+import com.hai.micro.common.other.error.BusinessException;
 import com.hai.micro.common.other.nacos.NacosCommonConfig;
 import com.hai.micro.common.other.utils.JwtUtils;
 import com.hai.micro.common.other.utils.WebUtils;
@@ -64,13 +64,13 @@ public class TokenAuthHandlerInterceptor implements HandlerInterceptor {
             }
             if (Strings.isBlank(accessToken)) {
                 log.info("请求IP: {}", WebUtils.getIpServlet(request));
-                throw new BaseException("身份验证失败，token为空");
+                throw new BusinessException("身份验证失败，token为空");
             } else {
                 JwtAccessTokenVO jwtAccessTokenVO = JwtUtils.parseClientToken(accessToken);
                 if (jwtAccessTokenVO == null) {
                     log.info("请求IP: {}", WebUtils.getIpServlet(request));
                     log.info("请求token: {}", accessToken);
-                    throw new BaseException("身份验证失败，请重新登陆");
+                    throw new BusinessException("身份验证失败，请重新登陆");
                 } else {
                     // 校验服务授权类型
                     SystemAuthTypeEnum systemAuthTypeEnum = verifySystemAuthType(jwtAccessTokenVO);
@@ -115,7 +115,7 @@ public class TokenAuthHandlerInterceptor implements HandlerInterceptor {
             }
         }
         if (!verifyAuthType) {
-            throw new BaseException("身份验证失败，服务授权错误");
+            throw new BusinessException("身份验证失败，服务授权错误");
         }
         return systemAuthTypeEnum;
     }
@@ -134,7 +134,7 @@ public class TokenAuthHandlerInterceptor implements HandlerInterceptor {
             }
         }
         if (!verifyAuthType) {
-            throw new BaseException("身份验证失败，平台类型错误");
+            throw new BusinessException("身份验证失败，平台类型错误");
         }
     }
 }

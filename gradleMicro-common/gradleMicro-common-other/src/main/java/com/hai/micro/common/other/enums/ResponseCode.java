@@ -26,11 +26,11 @@ public enum ResponseCode implements IErrorCode {
 
     @Override
     public int getCode() {
-        return 0;
+        return this.code;
     }
 
     @Override
     public String getMessage() {
-        return null;
+        return this.message;
     }
 }
