@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.hai.micro.service.test.firstTest.mapper.OnlineTransLogMapper">
+
+	<select id="getLogByTradeNo" resultType="com.hai.micro.service.test.entity.OnlineTransLog">
+		SELECT * FROM online_trans_log
+		WHERE trade_no = #{tradeNo} and root_org_id = #{rootOrgId}
+	</select>
+
+
+</mapper>

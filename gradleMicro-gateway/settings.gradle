@@ -1,0 +1,3 @@
+rootProject.name = 'gradleMicro-gateway'
+includeFlat 'gradleMicro-common:gradleMicro-common-other'
+

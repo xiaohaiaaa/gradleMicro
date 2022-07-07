@@ -1,0 +1,11 @@
+rootProject.name = 'gradleMicro'
+include 'gradleMicro-gateway'
+include 'gradleMicro-common'
+include 'gradleMicro-service'
+include 'gradleMicro-service:gradleMicro-service-test'
+findProject(':gradleMicro-service:gradleMicro-service-test')?.name = 'gradleMicro-service-test'
+include 'gradleMicro-common:gradleMicro-common-token'
+findProject(':gradleMicro-common:gradleMicro-common-token')?.name = 'gradleMicro-common-token'
+include 'gradleMicro-common:gradleMicro-common-other'
+findProject(':gradleMicro-common:gradleMicro-common-other')?.name = 'gradleMicro-common-other'
+

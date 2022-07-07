@@ -1,0 +1,3 @@
+rootProject.name = 'gradleMicro-common-token'
+includeFlat 'gradleMicro-common-other'
+
