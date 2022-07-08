@@ -48,7 +48,7 @@ public class CheckSign {
     @Autowired
     private NacosCommonConfig nacosCommonConfig;
 
-    @Pointcut("execution(* com.hai.test.controller..*(..))")
+    @Pointcut("execution(* com.hai.micro.service..*Controller.*(..))")
     private void pointcut() {
     }
 

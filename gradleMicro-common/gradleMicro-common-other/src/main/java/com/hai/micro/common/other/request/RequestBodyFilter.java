@@ -1,4 +1,4 @@
-package com.hai.micro.gateway.filter;
+package com.hai.micro.common.other.request;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -7,9 +7,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
-
-import com.hai.micro.common.other.request.RequestBodyContext;
-import com.hai.micro.common.other.request.RequestWrapper;
 
 import lombok.extern.slf4j.Slf4j;
 

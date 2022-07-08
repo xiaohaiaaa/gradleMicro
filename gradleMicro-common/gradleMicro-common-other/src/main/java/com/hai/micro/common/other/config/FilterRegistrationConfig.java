@@ -1,10 +1,10 @@
-package com.hai.micro.gateway.config;
+package com.hai.micro.common.other.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.hai.micro.gateway.filter.RequestBodyFilter;
+import com.hai.micro.common.other.request.RequestBodyFilter;
 
 /**
  * @ClassName FilterRegistrationConfig

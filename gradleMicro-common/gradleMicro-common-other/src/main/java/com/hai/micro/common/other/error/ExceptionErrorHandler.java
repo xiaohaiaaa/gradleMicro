@@ -2,6 +2,7 @@ package com.hai.micro.common.other.error;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,7 +52,12 @@ public class ExceptionErrorHandler {
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseModel runtimeExceptionHandler(HttpServletRequest request, RuntimeException e){
         getExceptionParam(request);
-        return ResponseModel.fail(e.getMessage());
+        log.error("运行时异常: ", e);
+        if (Strings.isNotBlank(e.getMessage())) {
+            return ResponseModel.fail(e.getMessage());
+        } else {
+            return ResponseModel.fail("空指针异常");
+        }
     }
 
     /**
@@ -63,7 +69,12 @@ public class ExceptionErrorHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseModel globalErrorHandler(HttpServletRequest request, Exception e) {
         getExceptionParam(request);
-        return ResponseModel.fail(e.getMessage());
+        log.error("其他异常: ", e);
+        if (Strings.isNotBlank(e.getMessage())) {
+            return ResponseModel.fail(e.getMessage());
+        } else {
+            return ResponseModel.fail("空指针异常");
+        }
     }
 
     private void getExceptionParam(HttpServletRequest req) {
