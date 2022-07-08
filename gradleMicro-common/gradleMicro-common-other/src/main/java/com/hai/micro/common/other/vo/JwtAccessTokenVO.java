@@ -2,6 +2,10 @@ package com.hai.micro.common.other.vo;
 
 import java.io.Serializable;
 
+import com.hai.micro.common.other.enums.JwtAppIdEnum;
+import com.hai.micro.common.other.enums.PlatformAuthTypeEnum;
+import com.hai.micro.common.other.enums.SystemAuthTypeEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

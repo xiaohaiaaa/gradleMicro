@@ -10,6 +10,7 @@ import com.hai.micro.common.other.vo.JwtAccessTokenVO;
 
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SmUtil;
 import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import cn.hutool.json.JSONObject;
@@ -29,12 +30,13 @@ import lombok.extern.slf4j.Slf4j;
 public class JwtUtils {
 
     public static final String JWT_KEY_SECRET = "HmacSHA256:zxh";
-    public static final String SMS_KEY_SECRET = "zxh:sm4";
+    // 这里的密钥key值需要是128bit的
+    public static final String SMS_KEY_SECRET = "cPVmnN2Ci5hvOrub";
     private static SymmetricCrypto sm4;
     private static Long DEFAULT_EXPIRE_SECONDS;
 
     static {
-        sm4 = SmUtil.sm4(SMS_KEY_SECRET.getBytes(StandardCharsets.UTF_8));
+        sm4 = SmUtil.sm4(StrUtil.bytes(SMS_KEY_SECRET, StandardCharsets.UTF_8));
         DEFAULT_EXPIRE_SECONDS = 86400000L;
     }
 
@@ -66,8 +68,8 @@ public class JwtUtils {
         if (jwtAccessTokenVO.getOpenAuthVO() != null) {
             payload.put("openAuthVO", jwtAccessTokenVO.getOpenAuthVO());
         }
-        String token = JWTUtil.createToken(payload, SMS_KEY_SECRET.getBytes(StandardCharsets.UTF_8));
-        return sm4.encryptBase64(token, CharsetUtil.CHARSET_UTF_8);
+        String token = JWTUtil.createToken(payload, JWT_KEY_SECRET.getBytes(StandardCharsets.UTF_8));
+        return sm4.encryptHex(token, CharsetUtil.CHARSET_UTF_8);
     }
 
     /**
@@ -79,7 +81,7 @@ public class JwtUtils {
     public static JwtAccessTokenVO parseClientToken(String token) {
         JwtAccessTokenVO jwtAccessTokenVO = null;
         try {
-            JWT jwt = JWTUtil.parseToken(sm4.decryptStr(token));
+            JWT jwt = JWTUtil.parseToken(sm4.decryptStr(token, CharsetUtil.CHARSET_UTF_8));
             if (jwt.verify()) {
                 throw new BusinessException("抱歉暂无访问权限");
             }

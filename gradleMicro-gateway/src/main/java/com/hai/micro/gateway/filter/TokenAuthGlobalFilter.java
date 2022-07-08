@@ -5,8 +5,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -21,7 +19,7 @@ import com.hai.micro.common.other.constant.AuthConstants;
 import com.hai.micro.common.other.utils.WebUtils;
 import com.hai.micro.common.other.vo.JwtAccessTokenVO;
 import com.hai.micro.gateway.nacos.PropAutoRefresh;
-import com.hai.micro.gateway.utils.JwtUtils;
+import com.hai.micro.common.other.utils.JwtUtils;
 import com.hai.micro.gateway.utils.ResponseUtil;
 
 import lombok.extern.slf4j.Slf4j;
@@ -63,16 +61,16 @@ public class TokenAuthGlobalFilter implements GlobalFilter, Ordered {
         }
         String headerToken = exchange.getRequest().getHeaders().getFirst(AuthConstants.JWT_ACCESS_TOKEN);
         if (Strings.isBlank(headerToken)) {
-            log.info("token为空，请求地址: {}", WebUtils.getIpServlet((HttpServletRequest)request));
-            ResponseUtil.webFluxResponseWriter(response, "token为空，请重新登陆", null);
+            log.info("token为空，请求地址: {}", WebUtils.getIpReactive(request));
+            return ResponseUtil.webFluxResponseWriter(response, "token为空，请重新登陆", null);
         }
         JwtAccessTokenVO jwtAccessTokenVO = JwtUtils.parseClientToken(headerToken);
         if (Objects.isNull(jwtAccessTokenVO)) {
-            log.info("token解析失败，请求地址: {}", WebUtils.getIpServlet((HttpServletRequest)request));
-            ResponseUtil.webFluxResponseWriter(response, "token解析失败，请重新登陆", null);
+            log.info("token解析失败，请求地址: {}", WebUtils.getIpReactive(request));
+            return ResponseUtil.webFluxResponseWriter(response, "token解析失败，请重新登陆", null);
         }
         exchange.getAttributes().put("JwtAccessTokenVO", jwtAccessTokenVO);
-        return null;
+        return chain.filter(exchange);
     }
 
     @Override

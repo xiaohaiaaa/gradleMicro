@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hai.micro.common.other.anno.ManageApiAuth;
 import com.hai.micro.common.other.anno.NoCheckSign;
 import com.hai.micro.common.other.anno.Section;
 import com.hai.micro.service.test.entity.City;
@@ -65,7 +66,7 @@ public class TestController {
      */
     @GetMapping("/add/ehcache")
     @ResponseBody
-    @NoCheckSign
+    @ManageApiAuth
     public City myTestForEhcache(@RequestParam("id") Long id) {
         return testService.testEhcache(id);
     }

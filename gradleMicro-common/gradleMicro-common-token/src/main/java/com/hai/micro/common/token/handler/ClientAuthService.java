@@ -44,7 +44,8 @@ public class ClientAuthService {
         checkClientAuthType(handler, platformAuthTypeEnum);
         switch (platformAuthTypeEnum) {
             case Manage:
-                handleManageUserAuth(jwtAccessTokenVO);
+                // todo 登录接口完善后再打开
+                //handleManageUserAuth(jwtAccessTokenVO);
                 break;
             case Machine:
                 handleMachineAuth(jwtAccessTokenVO);
@@ -74,21 +75,25 @@ public class ClientAuthService {
                 if (!manageApiAuth) {
                     throw new BusinessException("抱歉暂无访问权限");
                 }
+                break;
             case Machine:
                 boolean machineApiAuth = ((HandlerMethod) handler).hasMethodAnnotation(MachineApiAuth.class);
                 if (!machineApiAuth) {
                     throw new BusinessException("抱歉暂无访问权限");
                 }
+                break;
             case OpenAPI:
                 boolean openApiAuth = ((HandlerMethod) handler).hasMethodAnnotation(OpenApiAuth.class);
                 if (!openApiAuth) {
                     throw new BusinessException("抱歉暂无访问权限");
                 }
+                break;
             case WAP_MINI_APP:
                 boolean wapMiniApiAuth = ((HandlerMethod) handler).hasMethodAnnotation(WapMiniApiAuth.class);
                 if (!wapMiniApiAuth) {
                     throw new BusinessException("抱歉暂无访问权限");
                 }
+                break;
             default:
                 throw new BusinessException("抱歉暂无访问权限");
         }
