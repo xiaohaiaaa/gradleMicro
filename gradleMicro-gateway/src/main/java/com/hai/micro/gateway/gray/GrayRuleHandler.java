@@ -17,7 +17,7 @@ import com.hai.micro.gateway.constant.GrayHeaderRequestConstant;
 
 /**
  * @ClassName GrayRuleHandler
- * @Description
+ * @Description 灰度规则处理
  * @Author ZXH
  * @Date 2022/5/31 10:46
  * @Version 1.0
