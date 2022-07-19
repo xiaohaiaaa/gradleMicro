@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hai.micro.service.test.entity.City;
+import com.hai.micro.common.other.entity.City;
 
 /**
  * @Entity com.hai.test.domain.City

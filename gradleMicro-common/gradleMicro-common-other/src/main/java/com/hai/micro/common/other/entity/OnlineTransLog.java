@@ -1,4 +1,4 @@
-package com.hai.micro.service.test.entity;
+package com.hai.micro.common.other.entity;
 
 import java.io.Serializable;
 import java.util.Date;

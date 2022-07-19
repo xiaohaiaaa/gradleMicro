@@ -3,7 +3,7 @@ package com.hai.micro.service.test.firstTest.mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.hai.micro.service.test.entity.OnlineTransLog;
+import com.hai.micro.common.other.entity.OnlineTransLog;
 
 /**
  * @ClassName OnlineTransLogMapper

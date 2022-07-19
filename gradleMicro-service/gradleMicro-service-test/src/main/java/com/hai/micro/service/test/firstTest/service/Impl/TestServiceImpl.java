@@ -20,8 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hai.micro.service.test.entity.City;
-import com.hai.micro.service.test.entity.OnlineTransLog;
+import com.hai.micro.common.other.entity.City;
+import com.hai.micro.common.other.entity.OnlineTransLog;
 import com.hai.micro.service.test.entity.vo.ImportVO;
 import com.hai.micro.service.test.firstTest.mapper.CityMapper;
 import com.hai.micro.service.test.firstTest.service.OnlineTransLogService;
@@ -93,7 +93,6 @@ public class TestServiceImpl implements TestService {
     @Override
     public City testEhcache(Long id) {
         City city = cityMapper.selectByPrimaryKey(id);
-        log.info("没有使用ehcache缓存！");
         return city;
     }
 

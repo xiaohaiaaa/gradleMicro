@@ -1,6 +1,6 @@
 package com.hai.micro.service.test.firstTest.service;
 
-import com.hai.micro.service.test.entity.TheOrder;
+import com.hai.micro.common.other.entity.TheOrder;
 
 public interface MQOrderService {
 

@@ -3,7 +3,7 @@ package com.hai.micro.service.test.firstTest.service.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hai.micro.service.test.entity.TheOrder;
+import com.hai.micro.common.other.entity.TheOrder;
 import com.hai.micro.service.test.firstTest.service.MQOrderService;
 import com.hai.micro.service.test.firstTest.service.OrderService;
 

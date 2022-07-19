@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
-import com.hai.micro.service.test.entity.OnlineTransLog;
+import com.hai.micro.common.other.entity.OnlineTransLog;
 import com.hai.micro.service.test.firstTest.mapper.OnlineTransLogMapper;
 import com.hai.micro.service.test.firstTest.service.OnlineTransLogService;
 

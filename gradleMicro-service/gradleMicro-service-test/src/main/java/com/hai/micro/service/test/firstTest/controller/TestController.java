@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hai.micro.common.other.anno.ManageApiAuth;
 import com.hai.micro.common.other.anno.NoCheckSign;
 import com.hai.micro.common.other.anno.Section;
-import com.hai.micro.service.test.entity.City;
+import com.hai.micro.common.other.entity.City;
 import com.hai.micro.service.test.entity.vo.CutVideoVO;
 import com.hai.micro.service.test.entity.vo.ImportVO;
 import com.hai.micro.service.test.firstTest.service.TestService;

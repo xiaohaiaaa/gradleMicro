@@ -16,7 +16,7 @@ import com.hai.micro.common.other.utils.JwtUtils;
 public class TokenTest {
 
     @Test
-    public void test() {
+    public void createClientToken() {
         JwtAccessTokenVO jwtAccessTokenVO = new JwtAccessTokenVO();
         jwtAccessTokenVO.setPlatformAuthType(PlatformAuthTypeEnum.Manage.name());
         jwtAccessTokenVO.setJwtAppId("1");

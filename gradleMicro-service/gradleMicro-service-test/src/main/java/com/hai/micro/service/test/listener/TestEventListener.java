@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-import com.hai.micro.service.test.entity.City;
+import com.hai.micro.common.other.entity.City;
 import com.hai.micro.service.test.firstTest.mapper.CityMapper;
 
 /**

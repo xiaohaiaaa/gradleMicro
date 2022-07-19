@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.hai.micro.service.test.entity.City;
+import com.hai.micro.common.other.entity.City;
 import com.hai.micro.service.test.entity.vo.ImportVO;
 
 /**

@@ -1,6 +1,6 @@
 package com.hai.micro.service.test.firstTest.service;
 
-import com.hai.micro.service.test.entity.OnlineTransLog;
+import com.hai.micro.common.other.entity.OnlineTransLog;
 
 /**
  * @ClassName OnlineTransLogService

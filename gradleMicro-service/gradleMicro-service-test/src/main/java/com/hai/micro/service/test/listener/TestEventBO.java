@@ -2,7 +2,7 @@ package com.hai.micro.service.test.listener;
 
 import org.springframework.context.ApplicationEvent;
 
-import com.hai.micro.service.test.entity.City;
+import com.hai.micro.common.other.entity.City;
 
 /**
  * @ClassName TestEvent

@@ -1,6 +1,6 @@
 package com.hai.micro.service.test.firstTest.service;
 
-import com.hai.micro.service.test.entity.Stock;
+import com.hai.micro.common.other.entity.Stock;
 
 public interface StockService {
 

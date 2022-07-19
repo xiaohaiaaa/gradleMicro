@@ -4,19 +4,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hai.micro.service.test.firstTest.mapper.CityMapper">
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.hai.micro.service.test.entity.City">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultType="com.hai.micro.common.other.entity.City">
         select * from city
         where id = #{id,jdbcType=INTEGER}
     </select>
 
-    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.hai.micro.service.test.entity.City" useGeneratedKeys="true">
+    <insert id="insert" keyColumn="ID" keyProperty="id" parameterType="com.hai.micro.common.other.entity.City" useGeneratedKeys="true">
         insert into city
         (id,name,country_code,district,population)
         values (#{id,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{countryCode,jdbcType=VARCHAR}
         ,#{district,jdbcType=VARCHAR},#{population,jdbcType=INTEGER})
     </insert>
 
-    <select id="selectForUpdate" resultType="com.hai.micro.service.test.entity.City">
+    <select id="selectForUpdate" resultType="com.hai.micro.common.other.entity.City">
         SELECT *
         FROM city
         WHERE id = #{id}

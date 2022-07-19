@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -20,6 +21,7 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 @MapperScan(basePackages = "com.hai.micro.service.test.**.mapper")
 @EnableCaching
 @EnableDiscoveryClient
+@EnableFeignClients(basePackages = "com.hai.micro.common.token.feign")
 public class TestApplication {
 
     public static void main(String[] args) {

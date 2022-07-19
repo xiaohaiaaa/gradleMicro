@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.hai.micro.common.token.handler.FeignAuthInterceptor;
 import com.hai.micro.common.token.handler.TokenAuthHandlerInterceptor;
 
 /**
@@ -19,9 +20,12 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Autowired
     private TokenAuthHandlerInterceptor tokenAuthHandlerInterceptor;
+    @Autowired
+    private FeignAuthInterceptor feignAuthInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(feignAuthInterceptor).addPathPatterns("/**").order(-2147483648);
         registry.addInterceptor(tokenAuthHandlerInterceptor).addPathPatterns("/**");
     }
 }

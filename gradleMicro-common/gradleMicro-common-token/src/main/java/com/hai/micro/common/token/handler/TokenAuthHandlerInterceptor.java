@@ -20,6 +20,7 @@ import com.hai.micro.common.other.nacos.NacosCommonConfig;
 import com.hai.micro.common.other.utils.JwtUtils;
 import com.hai.micro.common.other.utils.WebUtils;
 import com.hai.micro.common.other.vo.JwtAccessTokenVO;
+import com.hai.micro.common.token.service.ClientAuthService;
 
 import lombok.extern.slf4j.Slf4j;
 

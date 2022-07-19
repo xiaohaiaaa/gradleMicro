@@ -1,5 +1,6 @@
 package com.hai.micro.common.other.nacos;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,24 @@ import lombok.Data;
 @RefreshScope
 @Data
 public class NacosCommonConfig {
+
+    /**
+     * 服务名称
+     */
+    @Value("${spring.application.name:''}")
+    private String applicationName;
+
+    /**
+     * 微服务认证开关
+     */
+    @Value("${micro.service.access.enable:true}")
+    private Boolean serviceAccessEnable;
+
+    /**
+     * 微服务认证密钥集合
+     */
+    @Value("#{'${micro.service.access.secrets:SJ7zE8E1zv3UmjKU,E4+E3GiHcEuXbLpg}'.split(',')}")
+    private List<String> serviceAccessSecrets;
 
     /**
      * 商户新增套餐参数
