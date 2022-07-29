@@ -42,8 +42,6 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-cache:2.4.2'
     implementation 'net.sf.ehcache:ehcache:2.10.9.2'
     implementation 'org.springframework:spring-context:5.3.9'
-    implementation 'org.springframework.amqp:spring-amqp:2.3.9'
-    implementation 'org.springframework.amqp:spring-rabbit:2.3.9'
     implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.0.1'
     implementation 'io.github.openfeign:feign-slf4j:11.9'
     implementation 'org.springframework.cloud:spring-cloud-loadbalancer:3.0.1'

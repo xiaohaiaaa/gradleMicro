@@ -1,5 +1,6 @@
 rootProject.name = 'gradleMicro-service'
 include 'gradleMicro-service-test'
+include 'gradleMicro-service-second'
 includeFlat 'gradleMicro-common:gradleMicro-common-other'
 includeFlat 'gradleMicro-common:gradleMicro-common-token'
 
