@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Resource;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.hai.micro.common.other.entity.City;
 import com.hai.micro.common.other.entity.OnlineTransLog;
+import com.hai.micro.service.test.config.ThreadPoolUtils;
 import com.hai.micro.service.test.entity.vo.ImportVO;
 import com.hai.micro.service.test.firstTest.mapper.CityMapper;
 import com.hai.micro.service.test.firstTest.service.OnlineTransLogService;
@@ -33,6 +35,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -61,18 +64,27 @@ public class TestServiceImpl implements TestService {
      */
     @Override
     public void testService() {
-        int s = 10;
+        ThreadPoolUtils.submit(()->{
+            log.info(Thread.currentThread().getName());
+            try {
+                Thread.sleep(60 * 5 * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
+        /*int s = 10;
         //CountDownLatch countDownLatch = new CountDownLatch(s);
         int i = 1;
         while (i <= 10) {
             int j = i;
 
             //方式一
-            /*executor.execute(() -> {
+            *//*executor.execute(() -> {
                 //log.error(executor.getThreadNamePrefix() + j);
                 log.error(Thread.currentThread().getName());
                 //countDownLatch.countDown();
-            });*/
+            });*//*
 
             //方式二
             CompletableFuture<Integer> result = CompletableFuture.supplyAsync(() -> {
@@ -82,7 +94,7 @@ public class TestServiceImpl implements TestService {
 
             i++;
         }
-        /*try {
+        *//*try {
             countDownLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();

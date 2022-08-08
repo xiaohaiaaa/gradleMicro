@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hai.micro.common.other.anno.ManageApiAuth;
 import com.hai.micro.common.other.anno.NoCheckSign;
 import com.hai.micro.common.other.anno.Section;
+import com.hai.micro.common.other.anno.WhiteList;
 import com.hai.micro.common.other.entity.City;
 import com.hai.micro.service.test.entity.vo.CutVideoVO;
 import com.hai.micro.service.test.entity.vo.ImportVO;
@@ -41,6 +42,7 @@ public class TestController {
      */
     @PostMapping("/threadFactory")
     @ResponseBody
+    @ManageApiAuth
     public String myTestForThreadFactory() {
         testService.testService();
         return "success1!";
