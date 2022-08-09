@@ -15,7 +15,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.4.2'
     implementation 'com.alibaba:fastjson:1.2.78'
     implementation 'org.apache.rocketmq:rocketmq-client:5.0.0-PREVIEW'
-
+    compileOnly 'org.projectlombok:lombok:1.18.24'
 }
 
 test {
