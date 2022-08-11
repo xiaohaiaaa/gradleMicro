@@ -10,7 +10,6 @@ import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
-import com.hai.micro.mq.producer.config.RocketMqProducerConfig;
 import com.hai.micro.service.test.firstTest.service.TestService;
 import com.hai.micro.service.test.utils.ThreadPoolUtil;
 

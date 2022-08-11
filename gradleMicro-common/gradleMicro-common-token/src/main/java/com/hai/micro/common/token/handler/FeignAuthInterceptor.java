@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.hai.micro.common.other.constant.CloudFeignConstants;
@@ -19,7 +18,6 @@ import com.hai.micro.common.token.service.FeignTokenAuthService;
  * @Date 2022/7/18 10:13
  * @Version 1.0
  **/
-@Component
 public class FeignAuthInterceptor implements HandlerInterceptor {
 
     @Autowired

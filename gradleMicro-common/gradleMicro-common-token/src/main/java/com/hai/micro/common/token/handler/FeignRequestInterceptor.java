@@ -16,7 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @ClassName FeignRequestInterceptor
- * @Description feign请求拦截器，设置请求头
+ * @Description feign请求拦截器，设置请求头。
+ * 交给spring管理之后，feign请求的时候会自动先调这个拦截器，不需要单独添加到webConfig
  * @Author ZXH
  * @Date 2022/7/15 14:51
  * @Version 1.0

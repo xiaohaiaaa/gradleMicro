@@ -1,6 +1,6 @@
 package com.hai.micro.common.token.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,14 +18,19 @@ import com.hai.micro.common.token.handler.TokenAuthHandlerInterceptor;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private TokenAuthHandlerInterceptor tokenAuthHandlerInterceptor;
-    @Autowired
-    private FeignAuthInterceptor feignAuthInterceptor;
+    @Bean
+    public TokenAuthHandlerInterceptor getTokenAuthHandlerInterceptor() {
+        return new TokenAuthHandlerInterceptor();
+    }
+
+    @Bean
+    public FeignAuthInterceptor getFeignAuthInterceptor() {
+        return new FeignAuthInterceptor();
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(feignAuthInterceptor).addPathPatterns("/**").order(-2147483648);
-        registry.addInterceptor(tokenAuthHandlerInterceptor).addPathPatterns("/**");
+        registry.addInterceptor(getFeignAuthInterceptor()).addPathPatterns("/**").order(Integer.MIN_VALUE);
+        registry.addInterceptor(getTokenAuthHandlerInterceptor()).addPathPatterns("/**").order(Integer.MAX_VALUE);
     }
 }
