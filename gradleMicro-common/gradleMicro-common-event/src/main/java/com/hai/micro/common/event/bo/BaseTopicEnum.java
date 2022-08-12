@@ -14,5 +14,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum BaseTopicEnum {
 
-    GOOSE_VIDEO_COMMON
+    GRADLE_MICRO_COMMON
 }

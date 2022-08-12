@@ -21,6 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.hai.micro.common.event.bo.BasePushBo;
+import com.hai.micro.common.event.bo.BaseTagEnum;
+import com.hai.micro.common.event.bo.BaseTopicEnum;
+import com.hai.micro.common.event.publish.LocalMessagePublish;
 import com.hai.micro.common.other.entity.City;
 import com.hai.micro.common.other.entity.OnlineTransLog;
 import com.hai.micro.service.test.config.ThreadPoolUtils;
@@ -54,6 +58,8 @@ public class TestServiceImpl implements TestService {
     private ApplicationEventPublisher eventPublisher;
     @Autowired
     private OnlineTransLogService onlineTransLogService;
+    @Autowired
+    private LocalMessagePublish localMessagePublish;
 
     //男性和女性
     private final String GENDER_MALE = "MALE";
@@ -105,6 +111,11 @@ public class TestServiceImpl implements TestService {
     @Override
     public City testEhcache(Long id) {
         City city = cityMapper.selectByPrimaryKey(id);
+        BasePushBo<City> basePushBo = new BasePushBo<>();
+        basePushBo.setContent(city);
+        basePushBo.setTopic(BaseTopicEnum.GRADLE_MICRO_COMMON);
+        basePushBo.setTag(BaseTagEnum.NOTIFY_CALL);
+        localMessagePublish.publish(basePushBo);
         return city;
     }
 

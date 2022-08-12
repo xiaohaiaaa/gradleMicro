@@ -18,8 +18,4 @@ public enum BasePushType {
      * 事件消息
      */
     EVENT,
-    /**
-     * 物联网消息
-     */
-    IOT
 }
