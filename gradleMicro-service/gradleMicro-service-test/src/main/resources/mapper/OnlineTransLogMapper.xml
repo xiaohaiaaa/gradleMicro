@@ -3,7 +3,7 @@
 <mapper
 	namespace="com.hai.micro.service.test.firstTest.mapper.OnlineTransLogMapper">
 
-	<select id="getLogByTradeNo" resultType="com.hai.micro.common.other.com.hai.micro.mq.consumer.entity.OnlineTransLog">
+	<select id="getLogByTradeNo" resultType="com.hai.micro.common.other.entity.OnlineTransLog">
 		SELECT * FROM online_trans_log
 		WHERE trade_no = #{tradeNo} and root_org_id = #{rootOrgId}
 	</select>
