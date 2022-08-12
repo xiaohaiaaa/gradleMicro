@@ -17,7 +17,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.4.2'
     implementation 'com.alibaba:fastjson:1.2.78'
     implementation 'org.apache.rocketmq:rocketmq-client:5.0.0-PREVIEW'
-
+    implementation 'io.github.openfeign:feign-core:11.8'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    implementation 'org.springframework.cloud:spring-cloud-context:3.1.3'
+    implementation 'org.mybatis:mybatis:3.5.7'
+    implementation 'com.baomidou:mybatis-plus-boot-starter:3.4.3.1'
 }
 
 test {

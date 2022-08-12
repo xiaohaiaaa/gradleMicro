@@ -1,4 +1,4 @@
-package config;
+package com.hai.micro.mq.consumer.config;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,12 +7,8 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.stereotype.Component;
 
 import com.hai.micro.common.other.enums.BaseTopicEnum;

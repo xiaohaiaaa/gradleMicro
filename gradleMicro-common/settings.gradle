@@ -1,4 +1,5 @@
 rootProject.name = 'gradleMicro-common'
 include 'gradleMicro-common-token'
 include 'gradleMicro-common-other'
+include 'gradleMicro-common-event'
 

@@ -2,4 +2,5 @@ rootProject.name = 'gradleMicro-rocketmq'
 include 'gradleMicro-rocketmq-consumer'
 include 'gradleMicro-rocketmq-producer'
 includeFlat 'gradleMicro-common:gradleMicro-common-other'
+includeFlat 'gradleMicro-common:gradleMicro-common-token'
 

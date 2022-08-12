@@ -1,4 +1,4 @@
-package com.hai.micro.common.other.enums;
+package com.hai.micro.common.event.bo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
