@@ -47,7 +47,8 @@ dependencies {
     implementation 'org.springframework:spring-context:5.3.9'
     implementation 'org.springframework.amqp:spring-amqp:2.3.9'
     implementation 'org.springframework.amqp:spring-rabbit:2.3.9'
-    implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.1.3'
+    implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.0.1'
+    implementation 'org.springframework.cloud:spring-cloud-loadbalancer:3.0.1'
     implementation 'com.alicp.jetcache:jetcache-anno:2.7.0.M1'
     implementation 'com.alicp.jetcache:jetcache-starter-redis:2.7.0.M1'
     implementation 'com.alicp.jetcache:jetcache-redis-lettuce:2.7.0.M1'
@@ -78,6 +79,8 @@ dependencies {
 }
 
 configurations.all {
+    // 全局排除依赖
+    exclude group: 'org.springframework.cloud', module: 'spring-boot-starter-netflix-ribbon'
     // 指定版本
     resolutionStrategy {
         force 'ch.qos.logback:logback-classic:1.2.3'

@@ -19,6 +19,17 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.78'
     implementation 'org.apache.rocketmq:rocketmq-client:5.0.0-PREVIEW'
     compileOnly 'org.projectlombok:lombok:1.18.24'
+    implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.0.1'
+    implementation 'org.springframework.cloud:spring-cloud-commons:3.0.1'
+}
+
+configurations.all {
+    // 项目中存在多个版本时用来指定版本
+    resolutionStrategy {
+        force 'ch.qos.logback:logback-classic:1.2.3'
+        force 'org.springframework.boot:spring-boot:2.4.2'
+        force 'org.springframework.boot:spring-boot-autoconfigure:2.4.2'
+    }
 }
 
 test {

@@ -14,7 +14,7 @@ public class PropAutoRefreshBO {
     /**
      * 异步事件基础调用域名地址
      */
-    @Value("${event.callback.base.url:}")
+    @Value("${event.callback.base.url:http://localhost:9000}")
     private String eventCallbackBaseUrl;
 
     /**

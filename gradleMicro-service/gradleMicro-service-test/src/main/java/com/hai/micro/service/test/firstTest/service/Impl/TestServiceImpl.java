@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.hai.micro.common.event.bo.BasePushBo;
+import com.hai.micro.common.event.bo.BasePushType;
 import com.hai.micro.common.event.bo.BaseTagEnum;
 import com.hai.micro.common.event.bo.BaseTopicEnum;
 import com.hai.micro.common.event.publish.LocalMessagePublish;
@@ -115,6 +116,7 @@ public class TestServiceImpl implements TestService {
         basePushBo.setContent(city);
         basePushBo.setTopic(BaseTopicEnum.GRADLE_MICRO_COMMON);
         basePushBo.setTag(BaseTagEnum.NOTIFY_CALL);
+        basePushBo.setType(BasePushType.EVENT);
         localMessagePublish.publish(basePushBo);
         return city;
     }

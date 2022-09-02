@@ -11,7 +11,7 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.springframework.stereotype.Component;
 
-import com.hai.micro.common.other.enums.BaseTopicEnum;
+import com.hai.micro.common.event.bo.BaseTopicEnum;
 
 /**
  * @ClassName RocketMqProducerConfig

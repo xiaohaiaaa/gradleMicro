@@ -13,7 +13,6 @@ import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
 
 import cn.hutool.core.util.IdUtil;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @ClassName LocalMessageListen
@@ -22,13 +21,12 @@ import lombok.extern.slf4j.Slf4j;
  * @Date 2022/8/12 17:19
  * @Version 1.0
  **/
-@Slf4j
 @Component
 public class LocalMessageListen {
 
     private static final Logger logger = LoggerFactory.getLogger(LocalMessageListen.class);
 
-    @Autowired
+    @Autowired(required = false)
     private FeignMqProducerClient feignMqProducerClient;
 
     @EventListener(value = {LocalMessageEvent.class})

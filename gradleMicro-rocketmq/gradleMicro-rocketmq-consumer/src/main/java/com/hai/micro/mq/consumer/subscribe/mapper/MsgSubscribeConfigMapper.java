@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.dahuange.goose.video.api.mq.entity.MsgSubscribeConfig;
 
 import com.hai.micro.mq.consumer.entity.MsgSubscribeConfig;
 

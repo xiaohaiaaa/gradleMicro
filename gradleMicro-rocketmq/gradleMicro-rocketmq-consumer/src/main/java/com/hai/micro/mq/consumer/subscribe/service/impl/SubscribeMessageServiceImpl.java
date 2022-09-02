@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.hai.micro.mq.consumer.config.PropAutoRefreshBO;
@@ -29,6 +30,7 @@ import com.hai.micro.mq.consumer.subscribe.service.SubscribeMessageService;
  * @Version 1.0
  **/
 @Slf4j
+@Service
 public class SubscribeMessageServiceImpl implements SubscribeMessageService {
 
     @Autowired

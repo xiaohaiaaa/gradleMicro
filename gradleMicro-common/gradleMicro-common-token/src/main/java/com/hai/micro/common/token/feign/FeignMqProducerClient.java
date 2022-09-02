@@ -18,7 +18,7 @@ import com.hai.micro.common.token.handler.FeignAuthInterceptor;
  * @Date 2022/7/15 11:08
  * @Version 1.0
  **/
-@FeignClient(name = "gradleMicro-rocketmq-producer", path = "/test/feign", configuration = FeignAuthInterceptor.class)
+@FeignClient(name = "gradleMicro-rocketmq-producer", path = "/service/mq/producer/common/feign", configuration = FeignAuthInterceptor.class)
 public interface FeignMqProducerClient {
 
     /**
