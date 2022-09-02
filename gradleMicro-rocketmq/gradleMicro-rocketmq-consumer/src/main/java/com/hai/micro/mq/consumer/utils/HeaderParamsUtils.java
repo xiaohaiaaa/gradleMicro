@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.hai.micro.common.other.constant.AuthConstants;
 import com.hai.micro.common.other.constant.CloudFeignConstants;
 import com.hai.micro.common.other.utils.FeignSecretUtils;
+import com.hai.micro.common.other.utils.JwtUtils;
 
 
 /**
@@ -34,6 +36,8 @@ public class HeaderParamsUtils {
         headers.put(CloudFeignConstants.SERVICE_SECRETS, serviceToken);
         headers.put(CloudFeignConstants.SERVICE_NAME, applicationName);
         headers.put(CloudFeignConstants.SERVICE_NONCE, serviceNonce);
+        accessToken = JwtUtils.createServiceToken(applicationName);
+        headers.put(AuthConstants.JWT_ACCESS_TOKEN, accessToken);
         return headers;
     }
 }

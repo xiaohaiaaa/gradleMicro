@@ -41,7 +41,7 @@ public class RocketMqProducerServiceImpl implements RocketMqProducerService {
                 log.info("rocket.mq send msg success | local.msgId : {} ,topic : {} , result.msgId : {}",
                     mqMessageInfo.getMsgId(), mqMessageInfo.getTopic(), sendResult.getMsgId());
             }
-            sw.start();
+            sw.stop();
             log.info("{} -> 单次生产耗时：{}", mqMessageInfo.getMsgId(), sw.getTime());
         } catch (Exception e) {
             log.error("rocket.mq send msg error | msgInfo : {} , ", JSON.toJSONString(mqMessageInfo), e);

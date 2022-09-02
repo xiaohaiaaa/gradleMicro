@@ -30,9 +30,8 @@ public class RocketMqProducerController implements FeignMqProducerClient {
     private RocketMqProducerService rocketMqProducerService;
 
     @Override
-    public ResponseModel pushMsg(@RequestBody MqMessageInfo mqMessageInfo) {
+    public void pushMsg(@RequestBody MqMessageInfo mqMessageInfo) {
         log.info("rocketMq producer msg: {}", mqMessageInfo);
         rocketMqProducerService.sendMsg(mqMessageInfo);
-        return ResponseModel.success();
     }
 }

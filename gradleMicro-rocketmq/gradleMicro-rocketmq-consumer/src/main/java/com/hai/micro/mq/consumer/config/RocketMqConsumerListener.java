@@ -23,8 +23,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RocketMqConsumerListener implements MessageListenerConcurrently {
 
-    @Autowired
-    private DispatchMessageService dispatchMessageService;
+    private final DispatchMessageService dispatchMessageService;
+
+    public RocketMqConsumerListener(DispatchMessageService dispatchMessageService) {
+        this.dispatchMessageService = dispatchMessageService;
+    }
 
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {

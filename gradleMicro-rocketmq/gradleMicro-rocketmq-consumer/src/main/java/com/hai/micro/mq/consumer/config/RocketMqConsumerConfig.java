@@ -9,9 +9,11 @@ import javax.annotation.PostConstruct;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.hai.micro.common.event.bo.BaseTopicEnum;
+import com.hai.micro.mq.consumer.receive.DispatchMessageService;
 
 /**
  * @ClassName RocketMqProducerConfig
@@ -22,6 +24,9 @@ import com.hai.micro.common.event.bo.BaseTopicEnum;
  **/
 @Component
 public class RocketMqConsumerConfig {
+
+    @Autowired
+    private DispatchMessageService dispatchMessageService;
 
     private static DefaultMQProducer producer;
 
@@ -46,7 +51,7 @@ public class RocketMqConsumerConfig {
         }
 
         // 注册回调以在消息到达时执行以进行并发消费
-        consumer.registerMessageListener(new RocketMqConsumerListener());
+        consumer.registerMessageListener(new RocketMqConsumerListener(dispatchMessageService));
 
         // 启动消费者
         consumer.start();

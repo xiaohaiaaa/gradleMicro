@@ -28,5 +28,5 @@ public interface FeignMqProducerClient {
      * @return
      */
     @PostMapping("v1/push")
-    ResponseModel pushMsg(@RequestBody MqMessageInfo mqMessageInfo);
+    void pushMsg(@RequestBody MqMessageInfo mqMessageInfo);
 }

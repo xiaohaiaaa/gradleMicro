@@ -1,6 +1,8 @@
 package com.hai.micro.common.other.utils;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -98,5 +100,26 @@ public class JwtUtils {
             log.error("parseToken error", e);
         }
         return jwtAccessTokenVO;
+    }
+
+    /**
+     * 生产回调token
+     *
+     * @param applicationName
+     * @return
+     */
+    public static String createServiceToken(String applicationName) {
+        Map<String, Object> payload = new HashMap<>();
+        // 处理token过期
+        payload.put(RegisteredPayload.ISSUED_AT, System.currentTimeMillis());
+        Long expTime = LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        payload.put(RegisteredPayload.EXPIRES_AT,expTime);
+        payload.put(RegisteredPayload.JWT_ID, IdUtil.objectId());
+        // 默认值 客户端访问的token
+        payload.put(RegisteredPayload.ISSUER, SystemAuthTypeEnum.SERVICE.name());
+        // 接收jwt的一方
+        payload.put(RegisteredPayload.SUBJECT, applicationName);
+        String jwtToken = JWTUtil.createToken(payload, JWT_KEY_SECRET.getBytes(StandardCharsets.UTF_8));
+        return sm4.encryptBase64(jwtToken, CharsetUtil.CHARSET_UTF_8);
     }
 }

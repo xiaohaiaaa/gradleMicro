@@ -3,8 +3,6 @@ package com.hai.micro.mq.consumer.handle;
 import java.net.URI;
 import java.util.Map;
 
-import com.hai.micro.common.other.api.ResponseModel;
-
 import com.hai.micro.common.other.bo.MqMessageInfo;
 import feign.HeaderMap;
 import feign.RequestLine;
@@ -24,9 +22,8 @@ public interface CommDispatchApiService {
      * @param baseUri 回调地址
      * @param messageInfo messageInfo对象
      * @param headers 请求头
-     * @return 字符串Boole结果
      */
     @RequestLine("POST")
-    ResponseModel<Object> call(URI baseUri, MqMessageInfo messageInfo, @HeaderMap Map<String,String> headers);
+    void call(URI baseUri, MqMessageInfo messageInfo, @HeaderMap Map<String,String> headers);
 
 }

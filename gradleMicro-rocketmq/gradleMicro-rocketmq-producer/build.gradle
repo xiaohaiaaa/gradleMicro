@@ -21,6 +21,8 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.24'
     implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.0.1'
     implementation 'org.springframework.cloud:spring-cloud-commons:3.0.1'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2021.1'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2021.1'
 }
 
 configurations.all {

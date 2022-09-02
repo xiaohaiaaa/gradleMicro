@@ -32,6 +32,9 @@ dependencies {
     implementation 'com.alicp.jetcache:jetcache-redis-lettuce:2.7.0.M1'
     implementation 'org.springframework.boot:spring-boot-starter-cache:2.4.2'
     implementation 'org.ops4j.pax.jdbc:pax-jdbc-mysql:1.5.1'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2021.1'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2021.1'
+    implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.0.1'
 }
 
 configurations.all {
