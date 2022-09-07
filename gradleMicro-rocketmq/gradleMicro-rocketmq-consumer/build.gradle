@@ -35,6 +35,8 @@ dependencies {
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2021.1'
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2021.1'
     implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.0.1'
+    implementation 'io.github.openfeign:feign-httpclient:11.8'
+    implementation 'io.github.openfeign:feign-jackson:11.8'
 }
 
 configurations.all {

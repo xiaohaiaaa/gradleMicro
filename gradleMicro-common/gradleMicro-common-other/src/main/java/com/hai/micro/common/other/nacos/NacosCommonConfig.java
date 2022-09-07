@@ -89,4 +89,10 @@ public class NacosCommonConfig {
      */
     @Value("#{'${web.interceptor.whitelist:/error,/favicon.ico}'.split(',')}")
     private Set<String> whiteListStrs;
+
+    /**
+     * 请求request body 白名单，文件上传接口地址
+     */
+    @Value("#{'${white.api.request.body:/test/import/excel}'.split(',')}")
+    private Set<String> whiteApiRequestBody;
 }

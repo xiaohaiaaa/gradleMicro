@@ -108,9 +108,8 @@ public class TestServiceImpl implements TestService {
         }*/
     }
 
-    @Cacheable(value = "UserCache", condition = "#id >= 3", key = "#id")
     @Override
-    public City testEhcache(Long id) {
+    public City testRocketMq(Long id) {
         City city = cityMapper.selectByPrimaryKey(id);
         BasePushBo<City> basePushBo = new BasePushBo<>();
         basePushBo.setContent(city);
@@ -119,6 +118,12 @@ public class TestServiceImpl implements TestService {
         basePushBo.setType(BasePushType.EVENT);
         localMessagePublish.publish(basePushBo);
         return city;
+    }
+
+    @Cacheable(value = "UserCache", condition = "#id >= 3", key = "#id")
+    @Override
+    public City testEhcache(Long id) {
+        return cityMapper.selectByPrimaryKey(id);
     }
 
     @CacheEvict(value = "UserCache", key = "#id")

@@ -20,6 +20,13 @@ public interface TestService {
     void testService();
 
     /**
+     * 测试mq异步消息
+     * @param id
+     * @return
+     */
+    City testRocketMq(Long id);
+
+    /**
      * 测试Ehcache缓存加载
      * @param id
      * @return

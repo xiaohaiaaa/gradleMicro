@@ -2,6 +2,7 @@ package com.hai.micro.common.token.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -30,7 +31,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getFeignAuthInterceptor()).addPathPatterns("/**").order(Integer.MIN_VALUE);
-        registry.addInterceptor(getTokenAuthHandlerInterceptor()).addPathPatterns("/**").order(Integer.MAX_VALUE);
+        registry.addInterceptor(getFeignAuthInterceptor()).addPathPatterns("/**").order(Ordered.HIGHEST_PRECEDENCE);
+        registry.addInterceptor(getTokenAuthHandlerInterceptor()).addPathPatterns("/**").order(Ordered.LOWEST_PRECEDENCE);
     }
 }

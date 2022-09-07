@@ -9,29 +9,27 @@ import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
-import org.springframework.cloud.openfeign.support.SpringDecoder;
-import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hai.micro.mq.consumer.bo.BaseSubscribeBO;
 import com.hai.micro.common.other.bo.MqMessageInfo;
-
 import com.hai.micro.common.other.nacos.NacosCommonConfig;
+import com.hai.micro.mq.consumer.bo.BaseSubscribeBO;
 import com.hai.micro.mq.consumer.config.SubscribeMessageInitConfig;
 import com.hai.micro.mq.consumer.handle.CommDispatchApiService;
 import com.hai.micro.mq.consumer.receive.DispatchMessageService;
+import com.hai.micro.mq.consumer.utils.HeaderParamsUtils;
 
 import feign.Feign;
 import feign.Request;
 import feign.Retryer;
 import feign.Target;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
 import lombok.extern.slf4j.Slf4j;
-import com.hai.micro.mq.consumer.utils.HeaderParamsUtils;
 
 /**
  * @ClassName DispatchMessageService
@@ -56,13 +54,13 @@ public class DispatchMessageServiceImpl implements DispatchMessageService {
 
     @Autowired
     public void setCommDispatchApiService() {
-        HttpMessageConverter<Object> jsonConverter = new MappingJackson2HttpMessageConverter(new ObjectMapper());
-        ObjectFactory<HttpMessageConverters> converter = ()-> new HttpMessageConverters(jsonConverter);
-        this.commDispatchApiService = Feign.builder()
+        //HttpMessageConverter<Object> jsonConverter = new MappingJackson2HttpMessageConverter(new ObjectMapper());
+        //ObjectFactory<HttpMessageConverters> converter = ()-> new HttpMessageConverters(jsonConverter);
+        this.commDispatchApiService = Feign.builder().contract(new feign.Contract.Default())
             // 连接超时30秒，读取超时60秒
             .options(new Request.Options(30 * 1000, TimeUnit.MILLISECONDS, 60 * 1000, TimeUnit.MILLISECONDS, true))
             // 发生IO异常重试5次，每次重试最小间隔100ms，最大间隔1s，随着重试次数递增
-            .retryer(new Retryer.Default()).encoder(new SpringEncoder(converter)).decoder(new SpringDecoder(converter))
+            .retryer(new Retryer.Default()).encoder(new JacksonEncoder()).decoder(new JacksonDecoder())
             // 注册feign
             .target(Target.EmptyTarget.create(CommDispatchApiService.class));
     }

@@ -61,6 +61,19 @@ public class TestController {
     }
 
     /**
+     * 测试mq异步消息
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/rocketMq")
+    @ResponseBody
+    @ManageApiAuth
+    public City myTestForRocketMq(@RequestParam("id") Long id) {
+        return testService.testRocketMq(id);
+    }
+
+    /**
      * 测试使用Ehcache缓存
      *
      * @param id

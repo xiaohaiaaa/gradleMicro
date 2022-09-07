@@ -3,15 +3,19 @@ package com.hai.micro.mq.consumer.handle;
 import java.net.URI;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.hai.micro.common.other.bo.MqMessageInfo;
+
 import feign.HeaderMap;
+import feign.Headers;
 import feign.RequestLine;
 
 /**
  * @ClassName CommDispatchApiService
  * @Description: rpc feign调用
- * @Author Liyr
- * @Date 2021/12/24 14:59
+ * @Author zxh
+ * @Date 2022/09/06 14:59
  * @Version 1.0
  **/
 public interface CommDispatchApiService {
@@ -24,6 +28,7 @@ public interface CommDispatchApiService {
      * @param headers 请求头
      */
     @RequestLine("POST")
-    void call(URI baseUri, MqMessageInfo messageInfo, @HeaderMap Map<String,String> headers);
+    @Headers({"Content-Type: application/json"})
+    void call(URI baseUri, @RequestBody MqMessageInfo messageInfo, @HeaderMap Map<String,String> headers);
 
 }

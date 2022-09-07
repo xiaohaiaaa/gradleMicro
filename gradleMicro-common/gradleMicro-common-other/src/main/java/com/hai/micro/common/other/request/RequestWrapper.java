@@ -1,6 +1,7 @@
 package com.hai.micro.common.other.request;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
@@ -8,6 +9,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -26,14 +28,6 @@ public class RequestWrapper extends HttpServletRequestWrapper {
 
     private final String body;
     private final Map<String, String> headerMap;
-
-    public String getBody() {
-        return body;
-    }
-
-    public Map<String, String> getHeaderMap() {
-        return headerMap;
-    }
 
     public RequestWrapper(HttpServletRequest request) {
         super(request);
@@ -80,5 +74,42 @@ public class RequestWrapper extends HttpServletRequestWrapper {
         }
 
         this.headerMap = headerMap;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public Map<String, String> getHeaderMap() {
+        return headerMap;
+    }
+
+    @Override
+    public ServletInputStream getInputStream() {
+        final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body.getBytes());
+        return new ServletInputStream() {
+            @Override
+            public boolean isFinished() {
+                return false;
+            }
+
+            @Override
+            public boolean isReady() {
+                return false;
+            }
+
+            @Override
+            public void setReadListener(ReadListener readListener) {}
+
+            @Override
+            public int read() {
+                return byteArrayInputStream.read();
+            }
+        };
+    }
+
+    @Override
+    public BufferedReader getReader() {
+        return new BufferedReader(new InputStreamReader(this.getInputStream()));
     }
 }
