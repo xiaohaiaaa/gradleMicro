@@ -38,10 +38,10 @@ public class RocketMqConsumerConfig {
     @PostConstruct
     public void initProducer() throws MQClientException {
         // 实例化消费者
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("default_group");
 
         // 设置NameServer的地址
-        consumer.setNamesrvAddr("localhost:9876");
+        consumer.setNamesrvAddr("43.139.6.42:9876");
 
         // 订阅一个或者多个Topic，以及Tag来过滤需要消费的消息
         List<String> listenerTopics = Arrays.stream(BaseTopicEnum.values()).map(Enum::name)

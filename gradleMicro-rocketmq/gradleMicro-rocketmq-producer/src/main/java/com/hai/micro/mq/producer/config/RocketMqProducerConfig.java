@@ -28,7 +28,7 @@ public class RocketMqProducerConfig {
         // 实例化消息生产者Producer
         producer = new DefaultMQProducer("default_group");
         // 设置NameServer的地址
-        producer.setNamesrvAddr("localhost:9876");
+        producer.setNamesrvAddr("43.139.6.42:9876");
         // 设置重试次数
         producer.setRetryTimesWhenSendAsyncFailed(0);
         // 启动Producer实例
