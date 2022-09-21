@@ -9,8 +9,6 @@ import com.hai.micro.common.event.bo.BasePushBo;
 import com.hai.micro.common.event.event.LocalMessageEvent;
 import com.hai.micro.common.other.bo.MqMessageInfo;
 import com.hai.micro.common.token.feign.FeignMqProducerClient;
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
 
 import cn.hutool.core.util.IdUtil;
 
@@ -24,15 +22,13 @@ import cn.hutool.core.util.IdUtil;
 @Component
 public class LocalMessageListen {
 
-    private static final Logger logger = LoggerFactory.getLogger(LocalMessageListen.class);
-
     @Autowired(required = false)
     private FeignMqProducerClient feignMqProducerClient;
 
     @EventListener(value = {LocalMessageEvent.class})
     public <T> void listenLocalMessage(LocalMessageEvent<T> localMessageEvent) {
         BasePushBo<T> basePushBo = localMessageEvent.getBasePushBo();
-        logger.debug("listen local message body: {}", basePushBo);
+        //log.info("listen local message body: {}", basePushBo);
         switch (basePushBo.getType()) {
             case EVENT:
                 // 推送消息到mq producer服务
@@ -44,7 +40,7 @@ public class LocalMessageListen {
                 feignMqProducerClient.pushMsg(mqMessageInfo);
                 break;
             default:
-                logger.error("listen local message type no exist!");
+                //log.error("listen local message type no exist!");
                 break;
         }
     }

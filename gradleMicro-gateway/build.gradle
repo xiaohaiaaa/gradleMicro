@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.bmuschko.docker-remote-api' version '6.7.0'
 }
 
 group 'com.hai.gradle.micro'
@@ -17,6 +18,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-gateway-server:3.1.2'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-ribbon:2.2.10.RELEASE'
 
+    compile 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
     compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap:3.0.4'
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2021.1'
@@ -25,15 +30,11 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.78'
     implementation 'org.apache.poi:poi:5.2.2'
     implementation 'cn.hutool:hutool-all:5.7.20'
-    compileOnly 'org.projectlombok:lombok:1.18.24'
     implementation 'org.bouncycastle:bcpkix-jdk15on:1.70'
     implementation 'org.bouncycastle:bcprov-jdk15to18:1.71'
     testImplementation 'junit:junit:4.13.1'
+    implementation 'com.bmuschko:gradle-docker-plugin:6.7.0'
 
-}
-
-test {
-    useJUnitPlatform()
 }
 
 jar.enabled = true
@@ -43,4 +44,31 @@ jar.enabled = true
 configurations.all {
     // 全局排除依赖
     exclude group: 'org.springframework.data', module: 'spring-data-redis'
+}
+
+apply plugin: 'com.bmuschko.docker-remote-api'
+apply plugin: 'com.bmuschko.docker-spring-boot-application'
+
+dockerCreateDockerfile {
+    instruction 'RUN ln -snf /usr/share/zoneinfo/$TimeZone /etc/localtime && echo $TimeZone > /etc/timezone'
+    environmentVariable 'TimeZone', 'Asia/Shanghai'
+    environmentVariable 'myenv', 'this is my test'
+}
+
+docker {
+    url = "tcp://43.139.6.42:2375"
+    springBootApplication {
+        baseImage = "43.139.6.42:88/library/oneclick/openjdk:8-alpine"
+        maintainer = 'newframe'
+        ports = [6001, 8719]
+        images = ["43.139.6.42:88/library/${rootProject.name}/${project.name}:${version}"]
+        jvmArgs = ['-Djava.security.egd=file:/dev/./urandom']
+        mainClassName = "com.iscas.business.product.ProductApp"
+    }
+    registryCredentials {
+        url = "http://43.139.6.42:88"
+        username = "admin"
+        password = "Harbor12345"
+    }
+
 }

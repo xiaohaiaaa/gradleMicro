@@ -14,12 +14,15 @@ dependencies {
     implementation project(':gradleMicro-common:gradleMicro-common-token')
     implementation project(':gradleMicro-common:gradleMicro-common-event')
 
+    compile 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
     compileOnly 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'org.springframework.boot:spring-boot:2.4.2'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.4.2'
     implementation 'com.alibaba:fastjson:1.2.78'
     implementation 'org.apache.rocketmq:rocketmq-client:5.0.0-PREVIEW'
-    compileOnly 'org.projectlombok:lombok:1.18.24'
     implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.0.1'
     implementation 'org.springframework.cloud:spring-cloud-commons:3.0.1'
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config:2021.1'
@@ -35,8 +38,4 @@ configurations.all {
     }
     // 全局排除依赖
     exclude group: 'org.springframework.data', module: 'spring-data-redis'
-}
-
-test {
-    useJUnitPlatform()
 }

@@ -13,12 +13,11 @@ dependencies {
     implementation project(':gradleMicro-common:gradleMicro-common-other')
     implementation project(':gradleMicro-common:gradleMicro-common-token')
 
+    compile 'org.projectlombok:lombok:1.18.24'
     compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
     implementation 'org.springframework:spring-context:5.3.9'
     implementation 'cn.hutool:hutool-core:5.7.16'
     implementation 'com.alibaba:fastjson:1.2.78'
-}
-
-test {
-    useJUnitPlatform()
 }
