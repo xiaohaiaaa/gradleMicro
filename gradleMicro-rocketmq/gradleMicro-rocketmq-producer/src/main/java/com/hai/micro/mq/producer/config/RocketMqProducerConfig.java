@@ -31,6 +31,8 @@ public class RocketMqProducerConfig {
         producer.setNamesrvAddr("43.139.6.42:9876");
         // 设置重试次数
         producer.setRetryTimesWhenSendAsyncFailed(0);
+        // 关闭VIP通道
+        producer.setVipChannelEnabled(false);
         // 启动Producer实例
         producer.start();
     }
