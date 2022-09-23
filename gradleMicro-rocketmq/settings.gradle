@@ -1,6 +1,10 @@
 rootProject.name = 'gradleMicro-rocketmq'
 include 'gradleMicro-rocketmq-consumer'
 include 'gradleMicro-rocketmq-producer'
-includeFlat 'gradleMicro-common:gradleMicro-common-other'
-includeFlat 'gradleMicro-common:gradleMicro-common-token'
+include 'gradleMicro-common:gradleMicro-common-other'
+project(':gradleMicro-common:gradleMicro-common-other').projectDir = new File(settingsDir, '../gradleMicro-common/gradleMicro-common-other')
+include 'gradleMicro-common:gradleMicro-common-token'
+project(':gradleMicro-common:gradleMicro-common-token').projectDir = new File(settingsDir, '../gradleMicro-common/gradleMicro-common-token')
+include 'gradleMicro-common:gradleMicro-common-event'
+project(':gradleMicro-common:gradleMicro-common-event').projectDir = new File(settingsDir, '../gradleMicro-common/gradleMicro-common-event')
 

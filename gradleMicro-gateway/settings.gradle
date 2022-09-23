@@ -1,3 +1,4 @@
 rootProject.name = 'gradleMicro-gateway'
-includeFlat 'gradleMicro-common:gradleMicro-common-other'
+include 'gradleMicro-common:gradleMicro-common-other'
+project(':gradleMicro-common:gradleMicro-common-other').projectDir = new File(settingsDir, '../gradleMicro-common/gradleMicro-common-other')
 
