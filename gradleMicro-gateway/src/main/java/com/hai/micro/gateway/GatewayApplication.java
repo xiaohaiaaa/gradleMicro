@@ -13,7 +13,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  **/
 @SpringBootApplication
 @EnableDiscoveryClient
-//@LoadBalancerClient(name = "gradleMicro-service-test", configuration = GrayBalancerConfig.class)
 public class GatewayApplication {
 
     public static void main(String[] args) {

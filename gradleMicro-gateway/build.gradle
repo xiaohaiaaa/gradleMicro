@@ -7,7 +7,10 @@ group 'com.hai.gradle.micro'
 version '1.0-SNAPSHOT'
 
 repositories {
+    google()
+    maven { url "http://maven.oschina.net/content/groups/public" }
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -49,26 +52,18 @@ configurations.all {
 apply plugin: 'com.bmuschko.docker-remote-api'
 apply plugin: 'com.bmuschko.docker-spring-boot-application'
 
-dockerCreateDockerfile {
-    instruction 'RUN ln -snf /usr/share/zoneinfo/$TimeZone /etc/localtime && echo $TimeZone > /etc/timezone'
-    environmentVariable 'TimeZone', 'Asia/Shanghai'
-    environmentVariable 'myenv', 'this is my test'
-}
-
 docker {
     url = "tcp://43.139.6.42:2375"
     springBootApplication {
-        baseImage = "43.139.6.42:88/library/oneclick/openjdk:8-alpine"
-        maintainer = 'newframe'
-        ports = [6001, 8719]
-        images = ["43.139.6.42:88/library/${rootProject.name}/${project.name}:${version}"]
-        jvmArgs = ['-Djava.security.egd=file:/dev/./urandom']
-        mainClassName = "com.iscas.business.product.ProductApp"
+        baseImage = "openjdk:8-alpine"
+        ports = [9000]
+        images = ["gradle-micro-gateway:latest"]
+        jvmArgs = ["-Duser.timezone=Asia/Shanghai"]
+        mainClassName = "com.hai.micro.gateway.GatewayApplication"
     }
     registryCredentials {
         url = "http://43.139.6.42:88"
         username = "admin"
         password = "Harbor12345"
     }
-
 }
