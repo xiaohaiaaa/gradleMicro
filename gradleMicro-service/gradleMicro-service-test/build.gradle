@@ -1,7 +1,12 @@
 plugins {
     id 'java'
     id 'com.bmuschko.docker-remote-api' version '6.7.0'
+    id "org.springframework.boot" version "2.2.8.RELEASE"
 }
+
+apply plugin: 'com.bmuschko.docker-remote-api'
+apply plugin: 'com.bmuschko.docker-spring-boot-application'
+apply plugin: "org.springframework.boot"
 
 group 'com.hai.gradle.micro'
 version '1.0-SNAPSHOT'
@@ -55,7 +60,7 @@ dependencies {
     implementation 'org.springframework.amqp:spring-amqp:2.3.9'
     implementation 'org.springframework.amqp:spring-rabbit:2.3.9'
     implementation 'org.springframework.cloud:spring-cloud-openfeign-core:3.0.1'
-    implementation 'org.springframework.cloud:spring-cloud-loadbalancer:3.0.1'
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer:3.0.1'
     implementation 'com.alicp.jetcache:jetcache-anno:2.7.0.M1'
     implementation 'com.alicp.jetcache:jetcache-starter-redis:2.7.0.M1'
     implementation 'com.alicp.jetcache:jetcache-redis-lettuce:2.7.0.M1'
@@ -93,12 +98,8 @@ configurations.all {
         force 'ch.qos.logback:logback-classic:1.2.3'
         force 'org.springframework.boot:spring-boot:2.4.2'
         force 'org.springframework.boot:spring-boot-autoconfigure:2.4.2'
-        //force 'org.springframework.cloud:spring-cloud-commons:3.0.1'
     }
 }
-
-apply plugin: 'com.bmuschko.docker-remote-api'
-apply plugin: 'com.bmuschko.docker-spring-boot-application'
 
 docker {
     url = "tcp://43.139.6.42:2375"
