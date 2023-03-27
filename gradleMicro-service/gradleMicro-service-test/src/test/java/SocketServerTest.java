@@ -168,8 +168,6 @@ public class SocketServerTest {
         socketChannel.write(ByteBuffer.wrap("主动回复收到了".getBytes(StandardCharsets.UTF_8)));
         System.out.println("回复客户端[" + socketChannel.getRemoteAddress() + "]: 主动回复收到了");
 
-        key.interestOps(0);
-
         socketChannel.register(selector, SelectionKey.OP_READ);
 
         // 12、关闭相关资源
