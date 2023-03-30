@@ -61,6 +61,10 @@ public class SocketServerTest {
                     while ((str = bufferedReader.readLine()) != null) {
                         System.out.println(str);
                     }
+                    BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8));
+                    bufferedWriter.write("收到了");
+                    bufferedWriter.flush();
+                    socket.shutdownOutput();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -87,10 +91,14 @@ public class SocketServerTest {
         }
     }*/
 
-    private static Selector selector;
+    private static ServerSocketChannel serverSocketChannel = null;
+    private static Selector selector = null;
+    // 缓存一个read事件中一个不完整的包，以待下次read事件到来时拼接成完整的包
+    private static final ByteBuffer cacheBuffer = ByteBuffer.allocate(100);
+    private static int cacheBufferLen = 4;
 
-    public static void main(String[] args) throws IOException {
-        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+    public static void main(String[] args) throws Exception {
+        serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.configureBlocking(false);
         serverSocketChannel.bind(new InetSocketAddress(9999));
         selector = Selector.open();
@@ -113,7 +121,7 @@ public class SocketServerTest {
                     // 与远程服务器建立了连接
                 } else if (key.isReadable()) {
                     // 一个channel做好了读准备
-                    read(key);
+                    read2(key);
                 } else if (key.isWritable()) {
                     // 一个channel做好了写准备
                     write(key);
@@ -162,7 +170,8 @@ public class SocketServerTest {
         sc.register(selector, SelectionKey.OP_WRITE);
     }
 
-    private static void write(SelectionKey key) throws IOException {
+    private static void write(SelectionKey key) throws Exception {
+        Thread.sleep(1000);
         // 11、响应客户端
         SocketChannel socketChannel = (SocketChannel)key.channel();
         socketChannel.write(ByteBuffer.wrap("主动回复收到了".getBytes(StandardCharsets.UTF_8)));
@@ -172,6 +181,99 @@ public class SocketServerTest {
 
         // 12、关闭相关资源
         //socketChannel.close();
+    }
+
+    private static void read2(SelectionKey selectionKey) {
+        int head_length = 4;//数据包长度
+        byte[] headByte = new byte[4];
+
+        try {
+            SocketChannel channel = (SocketChannel) selectionKey.channel();
+            ByteBuffer byteBuffer = ByteBuffer.allocate(100);
+            int bodyLen = -1;
+            if (cacheBufferLen > head_length) {
+                byteBuffer = ByteBuffer.allocate(cacheBufferLen);
+                cacheBuffer.flip();
+                byteBuffer.put(cacheBuffer);
+            }
+            System.out.println("byteBuffer position: " + byteBuffer.position() + " byteBuffer capacity: " + byteBuffer.capacity());
+            // 当前read事件
+            channel.read(byteBuffer);
+            // write mode to read mode
+            byteBuffer.flip();
+            System.out.println("byteBuffer position: " + byteBuffer.position() + " byteBuffer capacity: " + byteBuffer.capacity());
+            int remainingLen = 0;
+            while ((remainingLen = byteBuffer.remaining()) > 0) {
+                System.out.println("remainingLen: " + remainingLen);
+                System.out.println("bodyLen: " + bodyLen);
+                if (bodyLen == -1) {
+                    // 还没有读出包头，先读包头
+                    System.out.println("还没有读出包头，先读包头");
+                    if (byteBuffer.remaining() >= head_length) {
+                        // 可以读出包头
+                        System.out.println("可以读出包头");
+                        byteBuffer.mark();
+                        byteBuffer.get(headByte);
+                        bodyLen = byteArrayToInt(headByte);
+                    } else {
+                        // 读不出包头，把已经读了的先存起来
+                        System.out.println("信息异常，不足以读出包头");
+                        break;
+                    }
+                } else {
+                    // 已经读出包头
+                    System.out.println("已经读出包头，准备读消息");
+                    if (byteBuffer.remaining() >= bodyLen) {
+                        // 可以读完一个包
+                        System.out.println("可以读完一个包");
+                        byte[] bodyByte = new byte[bodyLen];
+                        byteBuffer.get(bodyByte, 0, bodyLen);
+                        bodyLen = -1;
+                        cacheBufferLen = 4;
+                        cacheBuffer.clear();
+
+                        System.out.println("收到信息: " + new String(bodyByte));
+                    } else {
+                        // 没办法读完一个包，把已经读了的先存起来
+                        System.out.println("不足以读完一个包，先存起来");
+                        byteBuffer.reset();
+                        cacheBuffer.clear();
+                        cacheBuffer.put(byteBuffer);
+                        cacheBufferLen += bodyLen;
+                        break;
+                    }
+                }
+            }
+
+            selectionKey.interestOps(SelectionKey.OP_READ);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            try {
+                serverSocketChannel.close();
+                selectionKey.cancel();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * byte[]转int
+     *
+     * @param bytes
+     * @return
+     */
+    public static int byteArrayToInt(byte[] bytes) {
+        int value = 0;
+        // 由高位到低位
+        for (int i = 0; i < 4; i++) {
+            int shift = (4 - 1 - i) * 8;
+            value += (bytes[i] & 0x000000FF) << shift;// 往高位游
+        }
+        return value;
     }
 
 }

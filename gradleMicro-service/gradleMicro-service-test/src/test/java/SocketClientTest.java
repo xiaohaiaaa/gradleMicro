@@ -1,9 +1,5 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
+import java.io.*;
+import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 
 import org.junit.runner.RunWith;
@@ -36,7 +32,7 @@ public class SocketClientTest {
         socket.shutdownOutput();
     }*/
 
-    /*public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         Socket socket = new Socket("127.0.0.1", 9999);
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.UTF_8));
@@ -46,9 +42,9 @@ public class SocketClientTest {
             bufferedWriter.write("\n");
             bufferedWriter.flush();
         }
-    }*/
+    }
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         SocketChannel socketChannel = SocketChannel.open();
         socketChannel.connect(new InetSocketAddress("127.0.0.1", 9999));
         socketChannel.configureBlocking(false);
@@ -61,5 +57,5 @@ public class SocketClientTest {
             socketChannel.write(byteBuffer);
             byteBuffer.clear();
         }
-    }
+    }*/
 }

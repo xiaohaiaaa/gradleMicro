@@ -20,6 +20,7 @@ import com.hai.micro.service.test.entity.vo.CutVideoVO;
 import com.hai.micro.service.test.entity.vo.ImportVO;
 import com.hai.micro.service.test.firstTest.service.TestService;
 import com.hai.micro.service.test.utils.FfmpegUtil;
+import com.hai.micro.service.test.utils.TCPUtil;
 
 /**
  * @author 13352
@@ -226,6 +227,17 @@ public class TestController {
     @ResponseBody
     public Map testSelectSharding() {
         return testService.testSelectSharding();
+    }
+
+    /**
+     * 测试TCP连接
+     * @return
+     */
+    @GetMapping("/tcp")
+    @ResponseBody
+    @WhiteList
+    public String testTcp(@RequestParam("data") String data) {
+        return TCPUtil.sendData("127.0.0.1", 9999, data);
     }
 
 }
