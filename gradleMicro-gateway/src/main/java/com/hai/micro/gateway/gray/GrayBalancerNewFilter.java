@@ -120,7 +120,7 @@ public class GrayBalancerNewFilter implements GlobalFilter, Ordered {
                     }
                     // 取相同集群下实例
                     if (Strings.isNotBlank(clusterName)) {
-                        List<ServiceInstance> matchInstances = metadataMatchInstances.stream().filter(serviceInstance -> clusterName.equals(serviceInstance.getServiceId())).collect(Collectors.toList());
+                        List<ServiceInstance> matchInstances = metadataMatchInstances.stream().filter(serviceInstance -> clusterName.equals(serviceInstance.getMetadata().get("nacos.cluster"))).collect(Collectors.toList());
                         if (CollectionUtils.isNotEmpty(matchInstances)) {
                             metadataMatchInstances = matchInstances;
                         }
