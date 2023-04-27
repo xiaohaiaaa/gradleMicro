@@ -104,6 +104,7 @@ public class TestController {
      */
     @GetMapping("/thread/pool")
     @ResponseBody
+    @ManageApiAuth
     public void testExecutor() {
         testService.testExecutor();
     }
@@ -113,6 +114,7 @@ public class TestController {
      */
     @GetMapping("/grace/close")
     @ResponseBody
+    @ManageApiAuth
     public void graceClose() {
         System.exit(0);
     }

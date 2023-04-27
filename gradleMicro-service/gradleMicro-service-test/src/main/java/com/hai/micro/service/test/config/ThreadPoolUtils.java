@@ -69,10 +69,6 @@ public class ThreadPoolUtils {
      * @param runnable
      */
     public static void submit(Runnable runnable) {
-        log.info(
-                "submit 进入 当前线程池状态 :workQueueSize:{},corePoolSize:{},maximumPoolSize:{},largestPoolSize:{},PoolSize:{},activeCount:{},completedTaskCount:{},taskCount:{}",
-                workQueue.size(), pool.getCorePoolSize(), pool.getMaximumPoolSize(), pool.getLargestPoolSize(),
-                pool.getPoolSize(), pool.getActiveCount(), pool.getCompletedTaskCount(), pool.getTaskCount());
         pool.submit(runnable);
     }
 
@@ -82,21 +78,19 @@ public class ThreadPoolUtils {
      * @param runnable
      */
     public static void execute(Runnable runnable) {
-        log.info(
-                "execute 进入 当前线程池状态 :workQueueSize:{},corePoolSize:{},maximumPoolSize:{},largestPoolSize:{},PoolSize:{},activeCount:{},completedTaskCount:{},taskCount:{}",
-                workQueue.size(), pool.getCorePoolSize(), pool.getMaximumPoolSize(), pool.getLargestPoolSize(),
-                pool.getPoolSize(), pool.getActiveCount(), pool.getCompletedTaskCount(), pool.getTaskCount());
         pool.execute(runnable);
     }
 
     /**
      * 关闭线程池
      */
-    public static void shutdown() {
+    public static boolean shutdown() {
         try {
-            pool.awaitTermination(defaultAwaitTime,TimeUnit.SECONDS);
+            pool.shutdown();
+            return pool.awaitTermination(defaultAwaitTime,TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             log.error("关闭线程失败",e);
+            return false;
         }
     }
 
