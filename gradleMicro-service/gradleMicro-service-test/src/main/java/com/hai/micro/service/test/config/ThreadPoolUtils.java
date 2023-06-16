@@ -7,7 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * @ClassName ThreadPoolUtil
- * @Description
+ * @Description 在提交新任务时，正在运行的线程少于 corePoolSize 时，将创建一个新线程来处理请求，即使其他工作线程处于空闲状态也是如此。
+ * 如果正在运行的线程超过 corePoolSize 但小于 maxumPoolSize，任务会先放到队列中，仅当队列已满时，才会创建一个新线程去处理。
+ * 如果正在运行的线程超过 maxumPoolSize，则会按照拒绝策略处理。
  * @Author ZXH
  * @Date 2022/7/29 18:25
  * @Version 1.0
