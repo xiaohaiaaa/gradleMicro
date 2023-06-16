@@ -21,11 +21,11 @@ public class ThreadPoolUtils {
     //private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     private static final int CPU_COUNT = 2;
     /**
-     * 核心线程
+     * 核心线程 2
      */
     private static final int corePoolSize = Math.max(2, Math.min(CPU_COUNT - 1, 4));
     /**
-     * 最大线程
+     * 最大线程 5
      */
     private static final int maximumPoolSize = CPU_COUNT * 2 + 1;
     /**
@@ -40,7 +40,7 @@ public class ThreadPoolUtils {
     /**
      * 阻塞队列
      */
-    private static final BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(2000);
+    private static final BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>(1);
 
     //线程的创建工厂
     private static final ThreadFactory threadFactory = new ThreadFactory() {
@@ -55,7 +55,7 @@ public class ThreadPoolUtils {
     /**
      * 拒绝策略
      */
-    private static final RejectedExecutionHandler rejectHandler = new ThreadPoolExecutor.DiscardOldestPolicy();
+    private static final RejectedExecutionHandler rejectHandler = new ThreadPoolExecutor.CallerRunsPolicy();
 
     /**
      * 构建线程池执行器

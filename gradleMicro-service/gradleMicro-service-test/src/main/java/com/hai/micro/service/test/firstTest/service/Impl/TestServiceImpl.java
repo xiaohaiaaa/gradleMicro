@@ -3,8 +3,6 @@ package com.hai.micro.service.test.firstTest.service.Impl;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Resource;
@@ -40,7 +38,6 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -72,9 +69,10 @@ public class TestServiceImpl implements TestService {
     @Override
     public void testService() {
         ThreadPoolUtils.submit(()->{
-            log.info(Thread.currentThread().getName());
+            log.info("开始执行");
             try {
-                Thread.sleep(60 * 5 * 1000);
+                Thread.sleep(10 * 1000);
+                log.info("执行成功");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
