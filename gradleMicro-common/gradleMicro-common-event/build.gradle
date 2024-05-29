@@ -21,3 +21,7 @@ dependencies {
     implementation 'cn.hutool:hutool-core:5.7.16'
     implementation 'com.alibaba:fastjson:1.2.78'
 }
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}

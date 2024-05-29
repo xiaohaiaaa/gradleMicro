@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'com.bmuschko.docker-remote-api' version '6.7.0'
     id "org.springframework.boot" version "2.2.8.RELEASE"
+    id 'application'
 }
 
 apply plugin: 'com.bmuschko.docker-remote-api'
@@ -12,16 +13,16 @@ group 'com.hai.gradle.micro'
 version '1.0-SNAPSHOT'
 
 repositories {
-    google()
-    maven { url "http://maven.oschina.net/content/groups/public" }
     mavenCentral()
-    jcenter()
 }
 // springCloud及其组件和springBoot版本之前有严格的关联关系，不可随意更改
 dependencies {
     implementation project(':gradleMicro-common:gradleMicro-common-other')
     implementation project(':gradleMicro-common:gradleMicro-common-token')
     implementation project(':gradleMicro-common:gradleMicro-common-event')
+
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.10.2'
 
     compile 'org.projectlombok:lombok:1.18.24'
     compileOnly 'org.projectlombok:lombok:1.18.24'
@@ -102,18 +103,15 @@ configurations.all {
     }
 }
 
-docker {
-    url = "tcp://43.139.6.42:2375"
-    springBootApplication {
-        baseImage = "openjdk:8-alpine"
-        ports = [9110]
-        images = ["gradle-micro-service-test:latest"]
-        jvmArgs = ["-Duser.timezone=Asia/Shanghai"]
-        mainClassName = "com.hai.micro.service.test.TestApplication"
-    }
-    registryCredentials {
-        url = "http://43.139.6.42:88"
-        username = "admin"
-        password = "Harbor12345"
-    }
+application {
+    // 设置应用程序的入口类
+    mainClassName = 'com.hai.micro.service.test.TestApplication.java'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }

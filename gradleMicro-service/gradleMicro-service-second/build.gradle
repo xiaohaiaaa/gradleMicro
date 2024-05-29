@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'com.hai.gradle.micro'
@@ -84,4 +85,17 @@ configurations.all {
         force 'org.springframework.boot:spring-boot-autoconfigure:2.6.3'
         force 'io.github.openfeign:feign-core:11.8'
     }
+}
+
+application {
+    // 设置应用程序的入口类
+    mainClassName = 'com.hai.micro.service.second.SecondApplication.java'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }

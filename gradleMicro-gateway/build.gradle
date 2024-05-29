@@ -1,16 +1,14 @@
 plugins {
     id 'java'
     id 'com.bmuschko.docker-remote-api' version '6.7.0'
+    id 'application'
 }
 
 group 'com.hai.gradle.micro'
 version '1.0-SNAPSHOT'
 
 repositories {
-    google()
-    maven { url "http://maven.oschina.net/content/groups/public" }
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
@@ -40,10 +38,6 @@ dependencies {
 
 }
 
-jar.enabled = true
-/* 需要org.springframework.boot插件 不需要打包成可执行的jar*/
-//bootJar.enabled = false
-
 configurations.all {
     // 全局排除依赖
     exclude group: 'org.springframework.data', module: 'spring-data-redis'
@@ -52,18 +46,15 @@ configurations.all {
 apply plugin: 'com.bmuschko.docker-remote-api'
 apply plugin: 'com.bmuschko.docker-spring-boot-application'
 
-docker {
-    url = "tcp://43.139.6.42:2375"
-    springBootApplication {
-        baseImage = "openjdk:8-alpine"
-        ports = [9000]
-        images = ["gradle-micro-gateway:latest"]
-        jvmArgs = ["-Duser.timezone=Asia/Shanghai"]
-        mainClassName = "com.hai.micro.gateway.GatewayApplication"
-    }
-    registryCredentials {
-        url = "http://43.139.6.42:88"
-        username = "admin"
-        password = "Harbor12345"
-    }
+application {
+    // 设置应用程序的入口类
+    mainClassName = 'com.hai.micro.gateway.GatewayApplication.java'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }

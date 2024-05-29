@@ -16,3 +16,15 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+// 构建 gradleMicro-service-test 任务
+task buildServiceA(type: GradleBuild) {
+    dir = 'gradleMicro-service/gradleMicro-service-test' // 设置 gradleMicro-service-test 服务模块的相对路径
+    tasks = ['build'] // 执行的构建任务，可以根据实际需求进行调整
+}
+
+// 构建 gradleMicro-service-second 任务
+task buildServiceB(type: GradleBuild) {
+    dir = 'gradleMicro-service/gradleMicro-service-second' // 设置 gradleMicro-service-second 服务模块的相对路径
+    tasks = ['build'] // 执行的构建任务，可以根据实际需求进行调整
+}

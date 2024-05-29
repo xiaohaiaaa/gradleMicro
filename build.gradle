@@ -1,2 +1,20 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
 group 'com.hai.gradle.micro'
 version '1.0-SNAPSHOT'
+
+// 定义打包任务
+task packageApp(type: Jar) {
+    // 设置打包输出的目标目录
+    destinationDirectory = file('build/libs')
+    // 设置打包输出文件的名称
+    archiveFileName = 'gradleMicro.jar'
+
+    // 将项目的编译输出包含在打包文件中
+    from sourceSets.main.output
+    // 将项目的依赖库（JAR文件）包含在打包文件中
+    from configurations.runtimeClasspath.getFiles()
+}
