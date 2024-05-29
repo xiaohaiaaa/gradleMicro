@@ -21,9 +21,6 @@ dependencies {
     implementation project(':gradleMicro-common:gradleMicro-common-token')
     implementation project(':gradleMicro-common:gradleMicro-common-event')
 
-    testImplementation 'org.junit.platform:junit-platform-launcher:1.10.2'
-    testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.10.2'
-
     compile 'org.projectlombok:lombok:1.18.24'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
@@ -109,7 +106,8 @@ application {
 }
 
 test {
-    useJUnitPlatform()
+    //useJUnitPlatform()
+    useJUnit()
 }
 
 tasks.withType(JavaCompile) {

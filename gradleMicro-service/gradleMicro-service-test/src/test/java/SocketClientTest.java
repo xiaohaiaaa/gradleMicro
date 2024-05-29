@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -62,6 +63,11 @@ public class SocketClientTest {
             byteBuffer.clear();
         }
     }*/
+
+    @Test
+    public void testMethod() {
+        // 测试逻辑
+    }
 
     public static void main(String[] args) throws IOException {
         SocketChannel socketChannel = SocketChannel.open();

@@ -9,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -90,6 +91,11 @@ public class SocketServerTest {
             }
         }
     }*/
+
+    @Test
+    public void testMethod() {
+        // 测试逻辑
+    }
 
     private static ServerSocketChannel serverSocketChannel = null;
     private static Selector selector = null;
