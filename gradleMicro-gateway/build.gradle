@@ -48,7 +48,7 @@ apply plugin: 'com.bmuschko.docker-spring-boot-application'
 
 application {
     // 设置应用程序的入口类
-    mainClassName = 'com.hai.micro.gateway.GatewayApplication.java'
+    mainClassName = 'com.hai.micro.gateway.GatewayApplication'
 }
 
 test {

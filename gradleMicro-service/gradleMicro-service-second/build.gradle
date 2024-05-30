@@ -89,7 +89,7 @@ configurations.all {
 
 application {
     // 设置应用程序的入口类
-    mainClassName = 'com.hai.micro.service.second.SecondApplication.java'
+    mainClassName = 'com.hai.micro.service.second.SecondApplication'
 }
 
 test {
